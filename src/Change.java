@@ -7,7 +7,7 @@ import java.util.*;
 public class Change extends JFrame implements ActionListener{
     JFrame f;
     JLabel l1;
-    JTextField t1;
+    JComboBox c1;
     JButton b1,b2;
     
     Change(){
@@ -18,10 +18,18 @@ public class Change extends JFrame implements ActionListener{
         l1 = new JLabel("Name of Event -");
         l1.setBounds(40, 20, 1000, 30);
         f.add(l1);
-
-        t1 = new JTextField();
-        t1.setBounds(150, 20, 150, 30);
-        f.add(t1);
+        
+        ConnectionClass obj = new ConnectionClass();
+        String[] ev = {};
+        try{
+            String query = "SELECT EventName FROM event;";
+            ResultSet rs = obj.stm.executeQuery(query);
+            Array eve = rs.getArray("EventName");
+            ev = (String[]) eve.getArray();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        c1 = new JComboBox(ev);
 
         b1 = new JButton("Back");
         b1.setBounds(40, 90, 120, 30);
@@ -37,4 +45,12 @@ public class Change extends JFrame implements ActionListener{
         f.setVisible(true);
         f.setSize(380, 170);
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+
 }

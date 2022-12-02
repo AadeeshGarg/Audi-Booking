@@ -62,7 +62,7 @@ public class AddEvent extends JFrame implements ActionListener {
             int b = 0;
 
             try {
-                if (name.equals("") || seats > 0 || cost >= 0.0) {
+                if (name.equals("") || seats <= 0 || cost <= 0.0) {
                     JOptionPane.showMessageDialog(null, "Invalid Entries");
                 } else {
                     ConnectionClass c1 = new ConnectionClass();
