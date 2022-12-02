@@ -20,12 +20,11 @@ public class Change extends JFrame implements ActionListener{
         f.add(l1);
         
         ConnectionClass obj = new ConnectionClass();
-        String[] ev = {};
         try{
-            String query = "SELECT EventName FROM event;";
+            String query = "SELECT * FROM event;";
             ResultSet rs = obj.stm.executeQuery(query);
             Array eve = rs.getArray("EventName");
-            ev = (String[]) eve.getArray();
+            String []ev = (String[]) eve.getArray();
             c1 = new JComboBox(ev);
             c1.setBounds(240, 20, 50, 30);
             c1.addActionListener(this);

@@ -42,13 +42,14 @@ if (ae.getSource() == b2) {
             int b = 0;
 
             try {
+                ConnectionClass c1 = new ConnectionClass();
+                ResultSet rs1 = c1.stm.executeQuery( "SELECT TotalSeats FROM Event where EventName  = '" + name + "';" );
+                ResultSet rs2 = c1.stm.executeQuery( "SELECT BookedSeats FROM Event where EventName  = '" + name + "';" );
+                ResultSet rs3 = c1.stm.executeQuery( "SELECT Price FROM Event where EventName  = '" + name + "';" );
                 if (name.equals("")) {
                     JOptionPane.showMessageDialog(null, "Please Select an Event");
                 } else {
-                    ConnectionClass c1 = new ConnectionClass();
-                    ResultSet rs1 = c1.stm.executeQuery( "SELECT TotalSeats FROM Event where EventName  = '" + name + "';" );
-                    ResultSet rs2 = c1.stm.executeQuery( "SELECT BookedSeats FROM Event where EventName  = '" + name + "';" );
-                    ResultSet rs3 = c1.stm.executeQuery( "SELECT Price FROM Event where EventName  = '" + name + "';" );
+                    System.out.print("1");
                     System.out.println(rs1.getString("TotalSeats"));
                     // JOptionPane.showMessageDialog(null, "Price is " + );
 
