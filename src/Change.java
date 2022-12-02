@@ -26,10 +26,13 @@ public class Change extends JFrame implements ActionListener{
             ResultSet rs = obj.stm.executeQuery(query);
             Array eve = rs.getArray("EventName");
             ev = (String[]) eve.getArray();
+            c1 = new JComboBox(ev);
+            c1.setBounds(240, 20, 50, 30);
+            c1.addActionListener(this);
+            f.add(c1);
         } catch (Exception e) {
             System.out.println(e);
         }
-        c1 = new JComboBox(ev);
 
         b1 = new JButton("Back");
         b1.setBounds(40, 90, 120, 30);
