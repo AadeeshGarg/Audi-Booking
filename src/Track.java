@@ -4,23 +4,38 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.*;
 
-public class Track extends JFrame implements ActionListener{
+public class Track extends JFrame implements ActionListener {
     JFrame f;
     JLabel l1;
-    JTextField t1;
     JButton b1, b2;
-    Track(){
+    JComboBox c1;
+
+    Track() {
         f = new JFrame("Track Event");
         f.setBackground(Color.white);
         f.setLayout(null);
 
         l1 = new JLabel("Name of Event -");
-        l1.setBounds(40, 20, 1000, 30);
+        l1.setBounds(50, 75, 1000, 30);
         f.add(l1);
 
-        t1 = new JTextField();
-        t1.setBounds(150, 20, 150, 30);
-        f.add(t1);
+        try {
+            ConnectionClass obj = new ConnectionClass();
+            String query = "SELECT eventname FROM event;";
+            ResultSet rs = obj.stm.executeQuery(query);
+            ArrayList<String> eve = new ArrayList<String>();
+            while (rs.next()) {
+                eve.add(rs.getString("eventname"));
+            }
+            Object[] ev = eve.toArray();
+            System.out.println(ev[0]);
+            c1 = new JComboBox<Object>(ev);
+            c1.setBounds(160, 75, 150, 30);
+            c1.addActionListener(this);
+            f.add(c1);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         b1 = new JButton("Back");
         b1.setBounds(40, 190, 120, 30);
@@ -34,25 +49,33 @@ public class Track extends JFrame implements ActionListener{
 
         f.getContentPane();
         f.setVisible(true);
-        f.setSize(400, 340);
+        f.setSize(400, 300);
     }
+
     public void actionPerformed(ActionEvent ae) {
-if (ae.getSource() == b2) {
-            String name = t1.getText();
+        if (ae.getSource() == b2) {
+            String name = (String) c1.getSelectedItem();
             int b = 0;
 
             try {
-                ConnectionClass c1 = new ConnectionClass();
-                ResultSet rs1 = c1.stm.executeQuery( "SELECT TotalSeats FROM Event where EventName  = '" + name + "';" );
-                ResultSet rs2 = c1.stm.executeQuery( "SELECT BookedSeats FROM Event where EventName  = '" + name + "';" );
-                ResultSet rs3 = c1.stm.executeQuery( "SELECT Price FROM Event where EventName  = '" + name + "';" );
+
                 if (name.equals("")) {
                     JOptionPane.showMessageDialog(null, "Please Select an Event");
                 } else {
-                    System.out.print("1");
+                    ConnectionClass c1 = new ConnectionClass();
+                    ResultSet rs1 = c1.stm.executeQuery(
+                            "SELECT TotalSeats,BookedSeats,Price FROM Event where EventName  = '" + name + "';");
+                    rs1.next();
                     System.out.println(rs1.getString("TotalSeats"));
-                    // JOptionPane.showMessageDialog(null, "Price is " + );
-
+                    System.out.println(rs1.getString("Price"));
+                    System.out.println(rs1.getString("BookedSeats"));
+                    int totSeats = Integer.parseInt(rs1.getString("TotalSeats"));
+                    Double price = Double.parseDouble(rs1.getString("Price"));
+                    int bookedSeats = Integer.parseInt(rs1.getString("BookedSeats"));
+                    Double revenue = bookedSeats * price;
+                    int availableSeats = totSeats - bookedSeats;
+                    JOptionPane.showMessageDialog(null, "Total Revenue for " + name + " = " + revenue
+                            + "\nTotal booked seats = " + bookedSeats + "\nTotal available seats = " + availableSeats);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

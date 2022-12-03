@@ -10,7 +10,7 @@ public class AddEvent extends JFrame implements ActionListener {
     JTextField t1, t2, t3;
     JButton b1, b2;
 
-    AddEvent(){
+    AddEvent() {
         f = new JFrame("Add New Event");
         f.setBackground(Color.white);
         f.setLayout(null);
@@ -57,16 +57,19 @@ public class AddEvent extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == b2) {
             String name = t1.getText();
-            int seats = Integer.parseInt(t2.getText());
-            Double cost = Double.parseDouble(t3.getText());
+            String name1 = t2.getText();
+            String name2 = t3.getText();
             int b = 0;
 
             try {
-                if (name.equals("") || seats <= 0 || cost <= 0.0) {
+                if (name.equals("") || (name1.equals("") || Integer.parseInt(name1) <= 0)
+                        || (name2.equals("") || Double.parseDouble(name2) < 0.0)) {
                     JOptionPane.showMessageDialog(null, "Invalid Entries");
                 } else {
+                    int seats = Integer.parseInt(name1);
+                    Double cost = Double.parseDouble(name2);
                     ConnectionClass c1 = new ConnectionClass();
-                    String q1 = "insert into event values('" + name + "','" + seats + "','" + cost + "','"+ b +"')";
+                    String q1 = "insert into event values('" + name + "','" + seats + "','" + cost + "','" + b + "')";
                     int aa = c1.stm.executeUpdate(q1);
 
                     if (aa == 1) {
@@ -89,4 +92,3 @@ public class AddEvent extends JFrame implements ActionListener {
         }
     }
 }
-

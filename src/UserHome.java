@@ -6,9 +6,9 @@ import java.util.*;
 
 public class UserHome extends JFrame implements ActionListener {
     JFrame f;
-    JButton b1,b2,b3,b4;
+    JButton b1, b2, b3, b4;
 
-    UserHome(){
+    UserHome() {
         f = new JFrame("User Home");
         f.setBackground(Color.WHITE);
         f.setLayout(null);
@@ -17,7 +17,7 @@ public class UserHome extends JFrame implements ActionListener {
         b1.setBounds(50, 50, 140, 120);
         b1.addActionListener(this);
         f.add(b1);
-        
+
         b2 = new JButton("View Event Details");
         b2.setBounds(200, 50, 140, 120);
         b2.addActionListener(this);
@@ -38,17 +38,21 @@ public class UserHome extends JFrame implements ActionListener {
         f.setSize(390, 350);
     }
 
-    public void actionPerformed(ActionEvent ae){
-        if(ae.getSource() == b1){
-            f.setVisible(false);
-            new ViewEvents();
-        } else if(ae.getSource() == b2){
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == b1) {
+            try {
+                new ViewEvents();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        } else if (ae.getSource() == b2) {
             f.setVisible(false);
             new ViewDetails();
-        } else if(ae.getSource() == b3){
+        } else if (ae.getSource() == b3) {
             f.setVisible(false);
             new BookSeats();
-        } else if(ae.getSource() == b4){
+        } else if (ae.getSource() == b4) {
             f.setVisible(false);
             new UserLogin();
         }
