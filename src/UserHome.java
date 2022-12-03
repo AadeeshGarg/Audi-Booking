@@ -6,9 +6,12 @@ import java.util.*;
 
 public class UserHome extends JFrame implements ActionListener {
     JFrame f;
-    JButton b1, b2, b3, b4;
+    JButton b1, b2, b3;
+    String UserId;
 
-    UserHome() {
+    UserHome(String UserId) {
+        this.UserId = UserId;
+
         f = new JFrame("User Home");
         f.setBackground(Color.WHITE);
         f.setLayout(null);
@@ -18,20 +21,15 @@ public class UserHome extends JFrame implements ActionListener {
         b1.addActionListener(this);
         f.add(b1);
 
-        b2 = new JButton("View Event Details");
+        b2 = new JButton("Book Seats");
         b2.setBounds(200, 50, 140, 120);
         b2.addActionListener(this);
         f.add(b2);
 
-        b3 = new JButton("Book Seats");
-        b3.setBounds(50, 180, 140, 120);
+        b3 = new JButton("Log Out");
+        b3.setBounds(125, 180, 140, 120);
         b3.addActionListener(this);
         f.add(b3);
-
-        b4 = new JButton("Log Out");
-        b4.setBounds(200, 180, 140, 120);
-        b4.addActionListener(this);
-        f.add(b4);
 
         f.getContentPane();
         f.setVisible(true);
@@ -48,11 +46,8 @@ public class UserHome extends JFrame implements ActionListener {
             }
         } else if (ae.getSource() == b2) {
             f.setVisible(false);
-            new ViewDetails();
+            new BookSeats(UserId);
         } else if (ae.getSource() == b3) {
-            f.setVisible(false);
-            new BookSeats();
-        } else if (ae.getSource() == b4) {
             f.setVisible(false);
             new UserLogin();
         }

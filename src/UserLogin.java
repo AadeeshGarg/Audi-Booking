@@ -79,7 +79,7 @@ public class UserLogin extends JFrame implements ActionListener {
 
                 if (rs.next()) {
                     f.setVisible(false);
-                    new UserHome();
+                    new UserHome(username1);
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Login Details");
                     f.setVisible(false);
@@ -91,7 +91,7 @@ public class UserLogin extends JFrame implements ActionListener {
         } else if (ee.getSource() == b2) {
             f.setVisible(false);
             new UserSignUp();
-        } else if(ee.getSource()==b3){
+        } else if (ee.getSource() == b3) {
             f.setVisible(false);
             new App();
         }
