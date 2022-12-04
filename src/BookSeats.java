@@ -56,7 +56,8 @@ public class BookSeats extends JFrame implements ActionListener {
             new BookTickets(UserId, (String) c1.getSelectedItem());
         } else if (ae.getSource() == b2) {
             f.setVisible(false);
-            new UserHome(UserId);
+            Thread t1 = new Thread(new UserHome(UserId));
+            t1.start();
         }
     }
 }

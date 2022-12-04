@@ -4,14 +4,38 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.*;
 
-public class UserHome extends JFrame implements ActionListener {
+public class UserHome extends JFrame implements ActionListener, Runnable {
     JFrame f;
     JButton b1, b2, b3, b4;
     String UserId;
 
     UserHome(String UserId) {
         this.UserId = UserId;
+    }
 
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == b1) {
+            try {
+                new ViewEvents();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        } else if (ae.getSource() == b2) {
+            f.setVisible(false);
+            new BookSeats(UserId);
+        } else if (ae.getSource() == b3) {
+            f.setVisible(false);
+            new UserLogin();
+            Thread.currentThread().stop();
+        } else if (ae.getSource() == b4) {
+            new ViewSeats(UserId);
+        }
+    }
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
         f = new JFrame("User Home");
         f.setBackground(Color.WHITE);
         f.setLayout(null);
@@ -39,24 +63,6 @@ public class UserHome extends JFrame implements ActionListener {
         f.getContentPane();
         f.setVisible(true);
         f.setSize(390, 350);
-    }
 
-    public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == b1) {
-            try {
-                new ViewEvents();
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        } else if (ae.getSource() == b2) {
-            f.setVisible(false);
-            new BookSeats(UserId);
-        } else if (ae.getSource() == b3) {
-            f.setVisible(false);
-            new UserLogin();
-        } else if (ae.getSource() == b4) {
-            new ViewSeats(UserId);
-        }
     }
 }

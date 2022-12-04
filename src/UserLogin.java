@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.nio.file.attribute.UserDefinedFileAttributeView;
+
 import javax.swing.*;
 import java.sql.*;
 import java.util.*;
@@ -79,7 +81,8 @@ public class UserLogin extends JFrame implements ActionListener {
 
                 if (rs.next()) {
                     f.setVisible(false);
-                    new UserHome(username1);
+                    Thread t1 = new Thread(new UserHome(username1));
+                    t1.start();
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Login Details");
                     f.setVisible(false);
