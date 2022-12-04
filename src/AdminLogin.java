@@ -2,7 +2,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.sql.*;
-import java.util.*;
 
 public class AdminLogin extends JFrame implements ActionListener {
     JFrame f;
@@ -48,17 +47,17 @@ public class AdminLogin extends JFrame implements ActionListener {
         b1.setBounds(120, 220, 150, 40);
 
         b2 = new JButton("Back");
-        b2.setBounds(320,220, 150, 40);
+        b2.setBounds(320, 220, 150, 40);
         b2.addActionListener(this);
         l1.add(b2);
-        //b2 = new JButton("SignUp");
-        //b2.setBounds(320, 220, 150, 40);
+        // b2 = new JButton("SignUp");
+        // b2.setBounds(320, 220, 150, 40);
 
         l1.add(b1);
-        //l1.add(b2);
+        // l1.add(b2);
 
         b1.addActionListener(this);
-        //b2.addActionListener(this);
+        // b2.addActionListener(this);
 
         f.setVisible(true);
         f.setSize(580, 350);
@@ -68,7 +67,7 @@ public class AdminLogin extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent ee) {
         if (ee.getSource() == b1) {
-           try {
+            try {
                 ConnectionClass obj = new ConnectionClass();
                 String username1 = t1.getText();
                 String password1 = pf1.getText();

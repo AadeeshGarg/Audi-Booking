@@ -1,14 +1,12 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.sql.*;
-import java.util.*;
 
 public class AdminHome extends JFrame implements ActionListener {
     JFrame f;
-    JButton b1,b2,b3,b4;
+    JButton b1, b2, b3, b4;
 
-    AdminHome(){
+    AdminHome() {
         f = new JFrame("Admin Home");
         f.setBackground(Color.WHITE);
         f.setLayout(null);
@@ -17,7 +15,7 @@ public class AdminHome extends JFrame implements ActionListener {
         b1.setBounds(50, 50, 140, 120);
         b1.addActionListener(this);
         f.add(b1);
-        
+
         b2 = new JButton("Change Details");
         b2.setBounds(200, 50, 140, 120);
         b2.addActionListener(this);
@@ -38,17 +36,17 @@ public class AdminHome extends JFrame implements ActionListener {
         f.setSize(390, 350);
     }
 
-    public void actionPerformed(ActionEvent ae){
-        if(ae.getSource() == b1){
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == b1) {
             f.setVisible(false);
             new AddEvent();
-        } else if(ae.getSource() == b2){
+        } else if (ae.getSource() == b2) {
             f.setVisible(false);
             new Change();
-        } else if(ae.getSource() == b3){
+        } else if (ae.getSource() == b3) {
             f.setVisible(false);
             new Track();
-        } else if(ae.getSource() == b4){
+        } else if (ae.getSource() == b4) {
             f.setVisible(false);
             new AdminLogin();
         }
