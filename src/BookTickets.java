@@ -44,7 +44,7 @@ public class BookTickets extends JFrame implements ActionListener {
         b2.setBounds(200, 180, 140, 30);
         b2.addActionListener(this);
 
-        b3 = new JButton("View Availble Seats");
+        b3 = new JButton("View Available Seats");
         b3.setBounds(110, 210, 160, 30);
         b3.addActionListener(this);
 
@@ -69,7 +69,11 @@ public class BookTickets extends JFrame implements ActionListener {
             f.setVisible(false);
             new BookSeats(UserId);
         } else if (ae.getSource() == b3) {
-            new Table(eve);
+            try {
+                new Table(eve);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

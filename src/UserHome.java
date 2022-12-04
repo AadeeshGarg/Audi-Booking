@@ -56,7 +56,6 @@ public class UserHome extends JFrame implements ActionListener {
             f.setVisible(false);
             new UserLogin();
         } else if (ae.getSource() == b4) {
-            f.setVisible(false);
             new ViewSeats(UserId);
         }
     }

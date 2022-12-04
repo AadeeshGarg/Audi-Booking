@@ -21,17 +21,17 @@ public class ViewEvents extends JFrame implements ActionListener {
         ResultSetMetaData rsmd = rs.getMetaData();
         int columnsNumber = rsmd.getColumnCount();
 
-        Vector<String> columnNames = new Vector<String>(columnsNumber);
+        Vector<String> columnNames = new Vector<String>();
 
-        for (int column = 1; column <= columnsNumber; column++) {
+        for (int column = 1; column <= columnsNumber - 1; column++) {
             columnNames.add(rsmd.getColumnName(column));
         }
 
         Vector data = new Vector();
         Vector row = new Vector();
         while (rs.next()) {
-            row = new Vector(columnsNumber);
-            for (int i = 1; i <= columnsNumber; i++) {
+            row = new Vector();
+            for (int i = 1; i <= columnsNumber - 1; i++) {
                 row.add(rs.getObject(i));
             }
             data.add(row);

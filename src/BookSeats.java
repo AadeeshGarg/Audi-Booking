@@ -29,7 +29,6 @@ public class BookSeats extends JFrame implements ActionListener {
                 eve.add(rs.getString("eventname"));
             }
             Object[] ev = eve.toArray();
-            System.out.println(ev[0]);
             c1 = new JComboBox<Object>(ev);
             c1.setBounds(180, 50, 150, 30);
             c1.addActionListener(this);
