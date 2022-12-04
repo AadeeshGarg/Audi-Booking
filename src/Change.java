@@ -110,7 +110,7 @@ public class Change extends JFrame implements ActionListener {
                                     + newTotSeats + "' where eventname = '" + name + "';");
                         }
                         if (a1 == 1) {
-                            JOptionPane.showMessageDialog(null, "Detals Changed Successfully");
+                            JOptionPane.showMessageDialog(null, "Details Changed Successfully");
                             f.setVisible(false);
                             new AdminHome();
                         } else {

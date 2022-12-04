@@ -6,7 +6,7 @@ import java.util.*;
 
 public class UserHome extends JFrame implements ActionListener {
     JFrame f;
-    JButton b1, b2, b3;
+    JButton b1, b2, b3, b4;
     String UserId;
 
     UserHome(String UserId) {
@@ -21,15 +21,20 @@ public class UserHome extends JFrame implements ActionListener {
         b1.addActionListener(this);
         f.add(b1);
 
-        b2 = new JButton("Book Seats");
+        b2 = new JButton("Book Show/Event");
         b2.setBounds(200, 50, 140, 120);
         b2.addActionListener(this);
         f.add(b2);
 
         b3 = new JButton("Log Out");
-        b3.setBounds(125, 180, 140, 120);
+        b3.setBounds(200, 180, 140, 120);
         b3.addActionListener(this);
         f.add(b3);
+
+        b4 = new JButton("View Tickets");
+        b4.setBounds(50, 180, 140, 120);
+        b4.addActionListener(this);
+        f.add(b4);
 
         f.getContentPane();
         f.setVisible(true);
@@ -50,6 +55,9 @@ public class UserHome extends JFrame implements ActionListener {
         } else if (ae.getSource() == b3) {
             f.setVisible(false);
             new UserLogin();
+        } else if (ae.getSource() == b4) {
+            f.setVisible(false);
+            new ViewSeats(UserId);
         }
     }
 }
