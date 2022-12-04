@@ -69,7 +69,15 @@ public class AddEvent extends JFrame implements ActionListener {
                     int seats = Integer.parseInt(name1);
                     Double cost = Double.parseDouble(name2);
                     ConnectionClass c1 = new ConnectionClass();
-                    String q1 = "insert into event values('" + name + "','" + seats + "','" + cost + "','" + b + "')";
+                    StringBuffer sb = new StringBuffer();
+                    for (int i = 1; i <= seats; i++) {
+                        sb.append("" + i + " ");
+                    }
+                    String s = sb.toString();
+                    s.trim();
+
+                    String q1 = "insert into event values('" + name + "','" + seats + "','" + cost + "','" + b + "','"
+                            + s + "')";
                     int aa = c1.stm.executeUpdate(q1);
 
                     if (aa == 1) {

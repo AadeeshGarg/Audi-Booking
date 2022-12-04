@@ -54,7 +54,7 @@ public class BookSeats extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == b1) {
             f.setVisible(false);
-            new BookTickets(UserId);
+            new BookTickets(UserId, (String) c1.getSelectedItem());
         } else if (ae.getSource() == b2) {
             f.setVisible(false);
             new UserHome(UserId);

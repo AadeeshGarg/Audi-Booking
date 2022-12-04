@@ -9,10 +9,11 @@ public class BookTickets extends JFrame implements ActionListener {
     JLabel l1, l2, l3;
     JButton b1, b2, b3;
     JTextField t2, t1;
-    String UserId;
+    String UserId, eve;
 
-    BookTickets(String UserId) {
+    BookTickets(String UserId, String eve) {
         this.UserId = UserId;
+        this.eve = eve;
         f = new JFrame("Book Seats");
         f.setBackground(Color.white);
         f.setLayout(null);
@@ -58,7 +59,7 @@ public class BookTickets extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == b1) {
+        if (ae.getSource() == b2) {
             try {
 
             } catch (Exception e) {
@@ -67,6 +68,8 @@ public class BookTickets extends JFrame implements ActionListener {
         } else if (ae.getSource() == b1) {
             f.setVisible(false);
             new BookSeats(UserId);
+        } else if (ae.getSource() == b3) {
+            new Table(eve);
         }
     }
 }

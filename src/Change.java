@@ -44,27 +44,19 @@ public class Change extends JFrame implements ActionListener {
         t2.setBounds(235, 70, 150, 30);
         f.add(t2);
 
-        l3 = new JLabel("New total number of seats -");
-        l3.setBounds(40, 120, 1000, 30);
-        f.add(l3);
-
-        t3 = new JTextField();
-        t3.setBounds(235, 120, 150, 30);
-        f.add(t3);
-
         b1 = new JButton("Back");
-        b1.setBounds(40, 170, 120, 30);
+        b1.setBounds(40, 125, 120, 30);
         b1.addActionListener(this);
         f.add(b1);
 
         b2 = new JButton("Change");
-        b2.setBounds(250, 170, 120, 30);
+        b2.setBounds(250, 125, 120, 30);
         b2.addActionListener(this);
         f.add(b2);
 
         f.getContentPane();
         f.setVisible(true);
-        f.setSize(450, 250);
+        f.setSize(450, 200);
     }
 
     @Override
@@ -72,11 +64,10 @@ public class Change extends JFrame implements ActionListener {
         if (ae.getSource() == b2) {
             String name = (String) c1.getSelectedItem();
             String name1 = t2.getText();
-            String name2 = t3.getText();
             try {
                 if (name.equals("")) {
                     JOptionPane.showMessageDialog(null, "Please Select an Event");
-                } else if (name1.equals("") && name2.equals("")) {
+                } else if (name1.equals("")) {
                     JOptionPane.showMessageDialog(null, "No changes were made");
                 } else {
                     ConnectionClass c1 = new ConnectionClass();
@@ -85,30 +76,15 @@ public class Change extends JFrame implements ActionListener {
                             .executeQuery("SELECT BookedSeats FROM Event where EventName  = '" + name + "';");
                     rs1.next();
                     int bookedSeats = Integer.parseInt(rs1.getString("BookedSeats"));
-                    if (!name2.equals("") && Integer.parseInt(name2) < bookedSeats) {
-                        JOptionPane.showMessageDialog(null,
-                                "New Total Seats cannot be less than already Booked Seats!");
-                        this.f.setVisible(false);
-                        this.f.setVisible(true);
-                    } else if (!name1.equals("") && Double.parseDouble(name1) < 0) {
+                    if (!name1.equals("") && Double.parseDouble(name1) < 0) {
                         JOptionPane.showMessageDialog(null, "Please enter a valid price!");
                         this.f.setVisible(false);
                         this.f.setVisible(true);
                     } else {
-                        if (name2.equals("")) {
-                            Double newPrice = Double.parseDouble(name1);
-                            a1 = c1.stm.executeUpdate(
-                                    "Update event set price = '" + newPrice + "' where eventname = '" + name + "';");
-                        } else if (name1.equals("")) {
-                            int newTotSeats = Integer.parseInt(name2);
-                            a1 = c1.stm.executeUpdate("Update event set totalseats = '" + newTotSeats
-                                    + "' where eventname = '" + name + "';");
-                        } else {
-                            Double newPrice = Double.parseDouble(name1);
-                            int newTotSeats = Integer.parseInt(name2);
-                            a1 = c1.stm.executeUpdate("Update event set price = '" + newPrice + "', totalseats = '"
-                                    + newTotSeats + "' where eventname = '" + name + "';");
-                        }
+                        Double newPrice = Double.parseDouble(name1);
+                        a1 = c1.stm.executeUpdate(
+                                "Update event set price = '" + newPrice + "' where eventname = '" + name + "';");
+
                         if (a1 == 1) {
                             JOptionPane.showMessageDialog(null, "Details Changed Successfully");
                             f.setVisible(false);
