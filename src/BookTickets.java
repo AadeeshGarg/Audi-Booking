@@ -135,10 +135,10 @@ public class BookTickets extends JFrame implements ActionListener {
                         }
                     }
                 } catch (ArithmeticException e) {
-                    JOptionPane.showMessageDialog(null, "Enter Valid Deatils");
+                    JOptionPane.showMessageDialog(null, "Please enter Valid Deatils");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Exception Found");
+                    JOptionPane.showMessageDialog(null, "Please enter Valid Details");
                 }
             }
         } else if (ae.getSource() == b1) {
