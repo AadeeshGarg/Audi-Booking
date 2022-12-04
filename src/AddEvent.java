@@ -91,6 +91,8 @@ public class AddEvent extends JFrame implements ActionListener {
                     }
 
                 }
+            } catch (SQLIntegrityConstraintViolationException e) {
+                JOptionPane.showMessageDialog(null, "Event already exists");
             } catch (Exception e) {
                 e.printStackTrace();
             }
