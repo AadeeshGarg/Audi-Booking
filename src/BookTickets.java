@@ -70,7 +70,7 @@ public class BookTickets extends JFrame implements ActionListener {
             new BookSeats(UserId);
         } else if (ae.getSource() == b3) {
             try {
-                new Table(eve);
+                new Table(eve, UserId);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
