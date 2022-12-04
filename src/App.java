@@ -47,7 +47,7 @@ public class App extends JFrame implements ActionListener {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new UserHome("2021A7PS0446P");
+                new App();
             }
         });
     }

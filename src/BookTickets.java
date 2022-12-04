@@ -60,10 +60,86 @@ public class BookTickets extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == b2) {
-            try {
+            String bookSeats = t2.getText();
+            String bookCount = t1.getText();
+            if (bookSeats.equals("") || bookCount.equals("")) {
+                JOptionPane.showMessageDialog(null, "Enter Valid Deatils");
+            } else {
 
-            } catch (Exception e) {
-                e.printStackTrace();
+                try {
+                    ConnectionClass c1 = new ConnectionClass();
+                    ResultSet rs1 = c1.stm
+                            .executeQuery("SELECT availableSeats FROM Event where EventName  = '" + eve + "';");
+                    rs1.next();
+                    String availableSeats = rs1.getString("availableSeats");
+                    if (availableSeats == null) {
+                        JOptionPane.showMessageDialog(null, "No seats are availble in " + eve);
+                    } else {
+                        String availableTest = availableSeats.trim();
+                        String[] availableArray = availableTest.split(" ");
+                        String bookTest = bookSeats.trim();
+                        String[] bookArray = bookTest.split(" ");
+                        int flag = 0;
+                        if (Integer.parseInt(bookCount) != bookArray.length) {
+                            JOptionPane.showMessageDialog(null, "Invalid Details");
+                        } else {
+                            for (String element : bookArray) {
+                                for (String availableElement : availableArray) {
+                                    if (Integer.parseInt(element) == Integer.parseInt(availableElement)) {
+                                        flag++;
+                                    }
+                                }
+                            }
+                            if (flag != Integer.parseInt(bookCount)) {
+                                JOptionPane.showMessageDialog(null, "The requested seats are not available!");
+                            } else {
+                                ConnectionClass c2 = new ConnectionClass();
+                                String q1 = "insert into tickets values('" + UserId + "','" + eve + "','" + bookCount
+                                        + "','"
+                                        + bookSeats + "')";
+                                int aa = c2.stm.executeUpdate(q1);
+                                if (aa == 1) {
+                                    ConnectionClass c3 = new ConnectionClass();
+                                    ArrayList<String> newa = new ArrayList<>();
+                                    for (String d : availableArray) {
+                                        newa.add(d);
+                                    }
+                                    for (String element : bookArray) {
+                                        for (String availableElement : availableArray) {
+                                            if (Integer.parseInt(element) == Integer.parseInt(availableElement)) {
+                                                newa.remove(element);
+                                            }
+                                        }
+                                    }
+
+                                    StringBuffer sb = new StringBuffer();
+                                    for (String ele : newa) {
+                                        sb.append(ele + " ");
+                                    }
+                                    String s = sb.toString();
+                                    s.trim();
+                                    String q = "Update event set bookedSeats = bookedSeats + "
+                                            + Integer.parseInt(bookCount) + ", availableSeats ='" + s
+                                            + "' where eventName = '"
+                                            + eve + "';";
+                                    int aaa = c3.stm.executeUpdate(q);
+                                    JOptionPane.showMessageDialog(null, "Tickets booked Successfully");
+                                    f.setVisible(false);
+                                    new UserHome(UserId);
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Please enter valid details");
+                                    this.f.setVisible(false);
+                                    this.f.setVisible(true);
+                                }
+                            }
+                        }
+                    }
+                } catch (ArithmeticException e) {
+                    JOptionPane.showMessageDialog(null, "Enter Valid Deatils");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Exception Found");
+                }
             }
         } else if (ae.getSource() == b1) {
             f.setVisible(false);
