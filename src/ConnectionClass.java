@@ -8,7 +8,7 @@ public class ConnectionClass {
     ConnectionClass() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/users", "root", "Aadi2108*");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/users", "root", "pass");
             stm = con.createStatement();
 
             if (con.isClosed()) {
